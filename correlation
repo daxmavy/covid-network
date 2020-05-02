@@ -1,0 +1,20 @@
+import pandas as pd
+import math
+import networkx as nx
+import random as ra
+import math as ma
+import itertools
+
+df = pd.read_csv('UR_POW_ALL.csv')
+
+df.transpose()
+
+#get correlation matrix (pearson) 
+df.corr()
+
+plt.matshow(df.corr())
+plt.xticks(range(len(df.columns)), df.columns)
+plt.yticks(range(len(df.columns)), df.columns)
+plt.colorbar()
+plt.show()
+
