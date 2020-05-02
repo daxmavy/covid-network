@@ -18,3 +18,19 @@ plt.yticks(range(len(df.columns)), df.columns)
 plt.colorbar()
 plt.show()
 
+#attempt to reduce matrix - haven't been working so far:
+
+T = 1 #threshold value
+
+for i in df.index: 
+    for col in df.columns: 
+        if df.at[i, col] < T:
+            df.at[i, col] = 0
+            
+df.corr()
+
+plt.matshow(df.corr())
+plt.xticks(range(len(df.columns)), df.columns)
+plt.yticks(range(len(df.columns)), df.columns)
+plt.colorbar()
+plt.show()
