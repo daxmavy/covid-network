@@ -1,0 +1,39 @@
+gammac = 0.07 #recovery rate of children
+gammaw = 0.07 #recovery rate of children
+gammao = 0.07 #recovery rate of children
+
+drc= 0.001 #death rate of children
+drw=0.004 #death rate of working
+dro=0.1 #death rate of old
+
+#night pseudocode
+for n in range(len(areas)):
+    N = town total? (ie. sum(all below categories (9 in total)))
+    for i in ['CS'+n,'CI'+n,'CR'+n,'CD'+n,'WS'+n,'WI'+n,'WR'+n,'WD'+n,'OS'+n,'OI'+n,'OR'+n,'OD'+n]:
+        
+        if i =='CS'+n:
+            CSrow=ma.floor(-tau*CS/N*(CS*CI+CS*WI+CS*OI)) #(round down?)
+        if i =='CI'+n:
+            CIrow=ma.floor(tau*CS/N*(CS*CI+CS*WI+CS*OI))-gammac*CI-drc*CI
+        if i=='CR'+n:
+            CRrow=gammac*CI
+        if i=='CD'+n:
+            CIrow=drc*CI 
+            
+        if i =='WS'+n:
+            WSrow=-tau*WS/N*(WS*CI+WS*WI+WS*OI)
+        if i =='WI'+n:
+            WIrow=tau*WS/N*(WS*CI+WS*WI+WS*OI)-gammaw*WI-drw*WI
+        if i=='WR'+n:
+            WRrow=gammaw*WI
+        if i=='WD'+n:
+            WD=drw*WI
+            
+        if i =='OS'+n:
+            OSrow=-tau*OS/N*(OS*CI+OS*WI+OS*OI)
+        if i =='OI'+n:
+            OIrow=tau*OS/N*(OS*CI+OS*WI+OS*OI)-gammaw*OI-dro*OI
+        if i=='OR'+n:
+            ORrow=gammaw*OI
+        if i=='OD'+n:
+            ODrow=dro*CI
