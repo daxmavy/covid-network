@@ -1,3 +1,67 @@
+#for children, working and old, each have three categories of S, I, R (R=0)
+
+iCS = 0
+iCI = 0
+#iCR = 0
+iWS = 0
+iWI = 0
+#iWR = 0
+#initialise
+iOS = 0
+iOI = 0
+#iOR = 0
+# CD=0 #deaths
+# WD=0
+# OD=0
+
+
+tau = 0.3 #transmission rate ("lambda" from lec notes)
+gamma = 1/14 #recovery rate (1/infectious period?) -> 1/14?
+N = 36 #total num of nodes
+mortp = 0.1 #mortality rates of old people
+
+#need 12 in total of the below (3 sets of S, I, R, D)
+S_arr = []
+I_arr = []
+R_arr = []
+D_arr = []
+
+for n in areas:
+    G.add_node(n, 'CS'+n = iCS, 'CI'+n = iCI, 'CR'+n= 0, 'CD'+n= 0,'WS'+n = iWS, 'WI'+n= iWI, 'WR'+n = 0,'WD'+n= 0, 'OS'+n= iOS, 'OI'+n= iOI, 'OR'+n = 0, 'OD'+n= 0)
+    
+  
+# initialize list of lists 
+data = [{'Area': n, 'CS'+n: iCS, 'CI'+n: iCI, 'CR'+n: 0, 'CD'+n: 0,'WS'+n: iWS, 'WI'+n: iWI, 'WR'+n: 0,'WD'+n: 0, 'OS'+n: iOS, 'OI'+n: iOI, 'OR'+n: 0, 'OD'+n: 0} for n in areas] 
+
+df = pd.DataFrame(data, index = ['CS'+n, 'CI'+n, 'CR'+n, 'CD'+n, 'WS'+n, 'WI'+n, 'WR'+n,'WD'+n,'OS'+n, 'OI'+n, 'OR'+n,'OD'+n],
+             columns = ['CS'+n, 'CI'+n, 'CR'+n,'CD'+n, 'WS'+n, 'WI'+n, 'WR'+n, 'WD'+n,'OS'+n, 'OI'+n, 'OR'+n,'OD'+n]) #9n*9n size 
+
+
+#day?
+for n in range(len(areas)):
+    for i in ['WS','WI','WR','WD']:
+        #working class mixes with other towns
+        if i =='WS'+n:
+            WSirow=-tau*WS/N*(sum(WSi*WIj))
+        if i =='WI'+n:
+            WIrow=tau*WS/N*(WS*CI+WS*WI+WS*OI)-gammaw*WI-drw*WI
+        if i=='WR'+n:
+            WRrow=gammaw*WI
+        if i=='WD'+n:
+            WD=drw*WI
+      
+    
+#     Si, Ii, Ri, Di = SIRD_tot(g)
+#     S_arr.append(Si)
+#     I_arr.append(Ii)
+#     R_arr.append(Ri)
+#     D_arr.append(Di)
+
+
+
+
+
+#night code
 gammac = 0.07 #recovery rate of children
 gammaw = 0.07 #recovery rate of children
 gammao = 0.07 #recovery rate of children
